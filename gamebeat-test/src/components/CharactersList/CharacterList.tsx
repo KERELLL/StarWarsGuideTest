@@ -12,7 +12,6 @@ import {
   Button,
   CircularProgress,
   Grid,
-  Pagination,
   Popover,
   Theme,
   useTheme,
@@ -110,57 +109,52 @@ const CharacterList: React.FC = () => {
           Characters
         </NavLink>
       </Breadcrumbs>
-      <Box
-        sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}
+      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+        <FilterAltIcon />
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        sx={{ maxWidth: "30rem" }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
       >
-        <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-          <FilterAltIcon />
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          sx={{ maxWidth: "30rem" }}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreOutlined />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              Films
-            </AccordionSummary>
-            <AccordionDetails>
-              <Filter list={categories} filterName="filmTitles" />
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreOutlined />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              Genders
-            </AccordionSummary>
-            <AccordionDetails>
-              <Filter list={genders} filterName="genders" />
-            </AccordionDetails>
-          </Accordion>
-        </Popover>
-        <Pagination count={10} />
-      </Box>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreOutlined />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Films
+          </AccordionSummary>
+          <AccordionDetails>
+            <Filter list={categories} filterName="filmTitles" />
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreOutlined />}
+            aria-controls="panel2-content"
+            id="panel2-header"
+          >
+            Genders
+          </AccordionSummary>
+          <AccordionDetails>
+            <Filter list={genders} filterName="genders" />
+          </AccordionDetails>
+        </Accordion>
+      </Popover>
 
       {loading ? <CircularProgress sx={{ alignSelf: "center" }} /> : null}
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {characterList &&
           characterList.map((person: TPerson) => {
             return (
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={person.name}>
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={3} key={person.name}>
                 <Link
                   to={`/character/${person.id}`}
                   style={{ textDecoration: "none" }}

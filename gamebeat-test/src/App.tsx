@@ -24,6 +24,15 @@ function App() {
     palette: {
       mode: currentTheme,
     },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 400,
+        md: 550,
+        lg: 800,
+        xl: 1000,
+      },
+    },
   });
 
   return (

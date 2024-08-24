@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { decodeBase64Id } from "../../helpers/functions";
 
 const CharacterInformation: React.FC = () => {
   const { characterId } = useParams();
@@ -82,10 +83,14 @@ const CharacterInformation: React.FC = () => {
             }}
           >
             <img
+              src={`https://starwars-visualguide.com/assets/img/characters/${decodeBase64Id(
+                characterId
+              )}.jpg`}
               style={{
-                maxWidth: "20rem",
+                objectFit: "contain",
+                maxWidth: "18rem",
                 width: "100%",
-                height: "20rem",
+                height: "18rem",
               }}
             />
             <Box>
@@ -108,7 +113,7 @@ const CharacterInformation: React.FC = () => {
           </Typography>
           {data.person.filmConnection.films.map((film) => {
             return (
-              <Box sx={{ display: "flex", gap: "0.3rem" }}>
+              <Box sx={{ display: "flex", gap: "0.3rem" }} key={film.title}>
                 <Typography sx={{ fontWeight: 700 }}>{film.title} |</Typography>
                 <Typography>
                   Created: {new Date(data.person.created).getDate()}.

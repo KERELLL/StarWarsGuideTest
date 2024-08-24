@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
     <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {categories.map((category: { name: string; img: string }) => {
         return (
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={4}>
             <Link
               to={"/" + category.name.toLowerCase()}
               style={{ textDecoration: "none" }}
@@ -78,6 +78,7 @@ const HomePage: React.FC = () => {
                   src={category.img}
                   style={{
                     position: "absolute",
+                    objectFit: "cover",
                     left: 0,
                     top: 0,
                     zIndex: 0,

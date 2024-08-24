@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 interface FilterProps {
   list: string[];
   filterName: "filmTitles" | "genders";
+  page?: string;
 }
 
 const Filter: React.FC<FilterProps> = ({ list, filterName }) => {

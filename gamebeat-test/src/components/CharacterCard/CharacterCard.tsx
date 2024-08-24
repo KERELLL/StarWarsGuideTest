@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { decodeBase64Id } from "../../helpers/functions";
 import type { TPerson } from "types";
 
 interface CharacterCardProps {
@@ -22,13 +23,23 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         },
       }}
     >
-      <CardContent>
-        <Box sx={{ display: "flex", gap: "1.5rem" }}>
-          <Typography variant="h5" sx={{ fontSize: "1rem", fontWeight: "600" }}>
-            {character.name}
-          </Typography>
-        </Box>
-      </CardContent>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <img
+          src={`https://starwars-visualguide.com/assets/img/characters/${decodeBase64Id(
+            character.id
+          )}.jpg`}
+          loading="lazy"
+          style={{
+            objectFit: "contain",
+          }}
+        />
+        <Typography
+          variant="h5"
+          sx={{ fontSize: "1rem", fontWeight: "600", padding: "0.5rem" }}
+        >
+          {character.name}
+        </Typography>
+      </Box>
     </Card>
   );
 };

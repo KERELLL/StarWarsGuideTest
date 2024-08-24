@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "./store";
+import { RootState } from "./store";
 import { storage } from "../helpers/functions";
-import { useDispatch, useSelector } from "react-redux";
 
 const initialState = {
   theme: (storage.get("theme") || "dark") as "dark" | "light",
