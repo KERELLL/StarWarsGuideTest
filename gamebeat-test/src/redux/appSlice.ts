@@ -24,7 +24,4 @@ export const { setTheme } = appSlice.actions;
 
 export const selectApp = (state: RootState) => state.app;
 
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
-
 export default appSlice.reducer;

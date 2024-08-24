@@ -1,12 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import {
-  CircularProgress,
-  CssBaseline,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAppSelector } from "./redux/appSlice";
+import { useAppSelector } from "./redux/store";
 import MainLayout from "@components/MainLayout/MainLayout";
 import { Suspense, lazy } from "react";
 
@@ -20,6 +15,7 @@ const CharacterInformationPage = lazy(
   () => import("@pages/CharacterInformationPage")
 );
 const Error404Page = lazy(() => import("@pages/Error404"));
+const HomePage = lazy(() => import("@pages/HomePage"));
 
 function App() {
   const currentTheme = useAppSelector((state) => state.app.theme);
@@ -36,9 +32,10 @@ function App() {
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
           <MainLayout>
-            <Suspense fallback={<CircularProgress />}>
+            <Suspense>
               <Routes>
-                <Route path="/" element={<CharachterListPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/characters" element={<CharachterListPage />} />
                 <Route
                   path="/character/:characterId"
                   element={<CharacterInformationPage />}
