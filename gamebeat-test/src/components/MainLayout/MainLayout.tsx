@@ -10,7 +10,6 @@ import { PropsWithChildren } from "react";
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 import { useAppSelector } from "@hooks/useAppSelector";
-import { Outlet } from "react-router-dom";
 
 interface MainLayoutProps extends PropsWithChildren {}
 
@@ -55,7 +54,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           }}
         >
           <Header />
-          <Outlet />
+          {children}
         </Box>
         <Footer />
       </Container>
