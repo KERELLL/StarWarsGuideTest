@@ -1,8 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAppSelector } from "./redux/store";
-import MainLayout from "@components/MainLayout/MainLayout";
+import { useAppSelector } from "@redux/store";
+import MainLayout from "@components/MainLayout";
 import { Suspense, lazy } from "react";
 
 const client = new ApolloClient({

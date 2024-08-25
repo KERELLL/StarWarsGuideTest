@@ -1,17 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTER } from "../../graphql/queries";
-import { TGetCharacterQuery, TPerson } from "types";
-import { NavLink, useParams } from "react-router-dom";
-import {
-  Box,
-  Breadcrumbs,
-  CircularProgress,
-  Grid,
-  Theme,
-  Typography,
-} from "@mui/material";
+import { TGetCharacterQuery } from "types";
+import { useParams } from "react-router-dom";
+import { Box, CircularProgress, Theme, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { decodeBase64Id } from "../../helpers/functions";
+import { decodeBase64Id } from "@helpers/functions";
+import Breadcrumbs from "@components/Breadcrumbs";
+import FilmCard from "@components/FilmCard";
+import CharacterDetails from "@components/CharacterDetails";
 
 const CharacterInformation: React.FC = () => {
   const { characterId } = useParams();
@@ -34,44 +30,22 @@ const CharacterInformation: React.FC = () => {
             gap: "0.5rem",
           }}
         >
-          <Breadcrumbs aria-label="breadcrumb">
-            <NavLink
-              to="/"
-              style={({ isActive }) => {
-                return {
-                  textDecoration: "none",
-                  color: theme.palette.action.active,
-                  fontWeight: isActive ? "bold" : "",
-                };
-              }}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/characters"
-              style={({ isActive }) => {
-                return {
-                  textDecoration: "none",
-                  color: theme.palette.action.active,
-                  fontWeight: isActive ? "bold" : "",
-                };
-              }}
-            >
-              Characters
-            </NavLink>
-            <NavLink
-              to={`/character/${characterId}`}
-              style={({ isActive }) => {
-                return {
-                  textDecoration: "none",
-                  color: theme.palette.action.active,
-                  fontWeight: isActive ? "bold" : "",
-                };
-              }}
-            >
-              {data.person.name}
-            </NavLink>
-          </Breadcrumbs>
+          <Breadcrumbs
+            crumbs={[
+              {
+                link: "/",
+                title: "Home",
+              },
+              {
+                link: "/characters",
+                title: "Characters",
+              },
+              {
+                link: `/character/${characterId}`,
+                title: data.person.name,
+              },
+            ]}
+          />
 
           <Box
             sx={{
@@ -80,50 +54,44 @@ const CharacterInformation: React.FC = () => {
               width: "100%",
               gap: "3rem",
               marginTop: "2rem",
+              [theme.breakpoints.down("md")]: {
+                flexDirection: "column",
+              },
             }}
           >
-            <img
-              src={`https://starwars-visualguide.com/assets/img/characters/${decodeBase64Id(
-                characterId
-              )}.jpg`}
-              style={{
-                objectFit: "contain",
-                maxWidth: "18rem",
+            <Box
+              sx={{
                 width: "100%",
+                maxWidth: "18rem",
                 height: "18rem",
+                [theme.breakpoints.down("sm")]: {
+                  maxWidth: "unset",
+                },
               }}
-            />
-            <Box>
-              <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                {data.person.name}
-              </Typography>
-              <Typography>Birth Year: {data.person.birthYear}</Typography>
-              <Typography>Gender: {data.person.gender}</Typography>
-              <Typography>Skin Color: {data.person.skinColor}</Typography>
-              <Typography>
-                Created: {new Date(data.person.created).getDate()}.
-                {new Date(data.person.created).getMonth() + 1}.
-                {new Date(data.person.created).getFullYear()}
-              </Typography>
-              <Typography>Homeworld: {data.person.homeworld.name}</Typography>
+            >
+              <img
+                style={{
+                  backgroundImage: `url(https://starwars-visualguide.com/assets/img/characters/${decodeBase64Id(
+                    characterId
+                  )}.jpg)`,
+                  backgroundPosition: "center 10%",
+                  backgroundSize: "cover",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
             </Box>
+
+            <CharacterDetails character={data.person} />
           </Box>
           <Typography variant="h5" sx={{ fontWeight: 700, marginTop: "1rem" }}>
             Films:
           </Typography>
-          {data.person.filmConnection.films.map((film) => {
-            return (
-              <Box sx={{ display: "flex", gap: "0.3rem" }} key={film.title}>
-                <Typography sx={{ fontWeight: 700 }}>{film.title} |</Typography>
-                <Typography>
-                  Created: {new Date(data.person.created).getDate()}.
-                  {new Date(data.person.created).getMonth() + 1}.
-                  {new Date(data.person.created).getFullYear()} |
-                </Typography>
-                <Typography>Director: {film.director}</Typography>
-              </Box>
-            );
-          })}
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+            {data.person.filmConnection.films.map((film) => {
+              return <FilmCard key={film.title} filmInfo={film} />;
+            })}
+          </Box>
         </Box>
       )}
     </>

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { storage } from "../helpers/functions";
+import { storage } from "@helpers/functions";
 
 const initialState = {
   theme: (storage.get("theme") || "dark") as "dark" | "light",

@@ -41,6 +41,8 @@ export default defineConfig({
     alias: {
       "@components": path.resolve(__dirname, "./src/components"),
       "@pages": path.resolve(__dirname, "./src/pages"),
+      "@redux": path.resolve(__dirname, "./src/redux"),
+      "@helpers": path.resolve(__dirname, "./src/helpers"),
     },
   },
   plugins: [react()],
