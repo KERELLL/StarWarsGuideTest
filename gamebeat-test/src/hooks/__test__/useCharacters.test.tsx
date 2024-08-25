@@ -2,7 +2,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { useCharactersFilter } from "@hooks/useCharactersFilter";
 import { renderHook } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { characterList, singleCharacter } from "../../tests/person.fixture";
+import { characterList } from "../../tests/person.fixture";
 import { renderWithProviders } from "../../tests/test-utils";
 import { describe, expect, it } from "vitest";
 import { TFilter } from "types/filter.type";

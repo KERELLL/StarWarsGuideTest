@@ -1,10 +1,5 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "@components/MainLayout";
 import { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
