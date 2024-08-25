@@ -6,7 +6,8 @@ import {
   Typography,
 } from "@mui/material";
 import { updateListQueryParam } from "../../redux/filtersSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 
 interface FilterProps {
   list: string[];

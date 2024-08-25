@@ -6,7 +6,6 @@ const initialState: TFilterState = {
   queryParams: {
     filmTitles: [],
     genders: [],
-    page: "1",
   },
 };
 
@@ -19,16 +18,16 @@ export const filtersSlice = createSlice({
       action: PayloadAction<TFiltersActionsPayload>
     ) => {
       const { key, value } = action.payload;
-      if (key === "filmTitles" || key === "genders") {
-        if (state.queryParams[key].find((name) => name === value)) {
-          state.queryParams[key] = state.queryParams[key].filter(
-            (name) => name !== value
-          );
-        } else {
-          state.queryParams[key].push(value);
+      if (value !== "") {
+        if (key === "filmTitles" || key === "genders") {
+          if (state.queryParams[key].find((name) => name === value)) {
+            state.queryParams[key] = state.queryParams[key].filter(
+              (name) => name !== value
+            );
+          } else {
+            state.queryParams[key].push(value);
+          }
         }
-      } else {
-        state.queryParams[key] = value as string;
       }
     },
   },

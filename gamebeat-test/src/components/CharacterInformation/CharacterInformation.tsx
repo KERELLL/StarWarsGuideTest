@@ -71,6 +71,7 @@ const CharacterInformation: React.FC = () => {
             >
               <img
                 style={{
+                  borderRadius: "1rem",
                   backgroundImage: `url(https://starwars-visualguide.com/assets/img/characters/${decodeBase64Id(
                     characterId
                   )}.jpg)`,

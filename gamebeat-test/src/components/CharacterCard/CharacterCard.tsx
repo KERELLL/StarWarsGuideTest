@@ -13,6 +13,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
     <Card
       variant="outlined"
       sx={{
+        height: "20rem",
         transform: "translate(0, 0)",
         "&:hover": {
           transition: "all 0.2s ease-in-out",
@@ -34,7 +35,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
           )}.jpg`}
           loading="lazy"
           style={{
-            objectFit: "contain",
+            height: "15rem",
+            objectFit: "cover",
           }}
         />
         <Box sx={{ height: "4rem" }}>

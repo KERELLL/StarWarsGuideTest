@@ -1,18 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import appSlice from "./appSlice";
-import { useDispatch, useSelector } from "react-redux";
 import filterSlice from "./filtersSlice";
 
-export const store = configureStore({
-  reducer: {
-    app: appSlice,
-    filters: filterSlice,
-  },
+const rootReducer = combineReducers({
+  app: appSlice,
+  filters: filterSlice,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppStore = typeof store;
-
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+};
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];

@@ -1,7 +1,6 @@
 export interface TFilter {
   filmTitles: string[];
   genders: string[];
-  page: string;
 }
 
 export interface TFilterState {

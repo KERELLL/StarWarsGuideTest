@@ -1,9 +1,14 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAppSelector } from "@redux/store";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
 import MainLayout from "@components/MainLayout";
 import { Suspense, lazy } from "react";
+import { Provider } from "react-redux";
+import { setupStore } from "@redux/store";
 
 const client = new ApolloClient({
   uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
@@ -18,28 +23,10 @@ const Error404Page = lazy(() => import("@pages/Error404"));
 const HomePage = lazy(() => import("@pages/HomePage"));
 
 function App() {
-  const currentTheme = useAppSelector((state) => state.app.theme);
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: currentTheme,
-    },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 400,
-        md: 550,
-        lg: 800,
-        xl: 1000,
-      },
-    },
-  });
-
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
+    <Provider store={setupStore()}>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
           <MainLayout>
             <Suspense>
               <Routes>
@@ -53,9 +40,9 @@ function App() {
               </Routes>
             </Suspense>
           </MainLayout>
-        </ThemeProvider>
-      </BrowserRouter>
-    </ApolloProvider>
+        </BrowserRouter>
+      </ApolloProvider>
+    </Provider>
   );
 }
 

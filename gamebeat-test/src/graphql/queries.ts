@@ -1,11 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_CHARACTERS = gql`
-  query Query($first: Int, $after: String) {
-    allPeople(first: $first, after: $after) {
-      edges {
-        cursor
-      }
+  query Query {
+    allPeople {
       people {
         name
         id

@@ -20,7 +20,8 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@redux/*": ["redux/*"],
-      "@helpers/*": ["helpers/*"]
+      "@helpers/*": ["helpers/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"]

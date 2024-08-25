@@ -5,18 +5,21 @@ import {
 import { Box, Button } from "@mui/material";
 import { PropsWithChildren, useState } from "react";
 
-interface FilterMenuProps extends PropsWithChildren {}
+interface FilterMenuProps extends PropsWithChildren {
+  title: string;
+}
 
-const FilterMenu: React.FC<FilterMenuProps> = ({ children }) => {
+const FilterMenu: React.FC<FilterMenuProps> = ({ children, title }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleShow = () => {
     setIsVisible(!isVisible);
   };
+
   return (
     <Box>
       <Button variant="contained" onClick={handleShow}>
-        Filters
+        {title}
         {isVisible ? <ArrowDropUpOutlined /> : <ArrowDropDownOutlined />}
       </Button>
       <Box

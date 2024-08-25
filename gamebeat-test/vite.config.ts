@@ -1,3 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import { defineConfig, normalizePath } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -43,7 +47,13 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@redux": path.resolve(__dirname, "./src/redux"),
       "@helpers": path.resolve(__dirname, "./src/helpers"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
     },
   },
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./src/setupTests.ts"],
+  },
 });
